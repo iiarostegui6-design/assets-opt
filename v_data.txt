@@ -1,10 +1,13 @@
-# --- BONE MODIFIER (HEAD) ---
-48 65 61 64 53 63 61 6C 65 00 00 00 42 A8 00 00
-# --- AUTO AIM ASSIST (MAGNET) ---
-41 69 6D 41 73 73 69 73 74 46 6F 72 63 65 44 AF
-# --- VERTICAL LOCK (Y-AXIS) ---
-56 65 72 74 69 63 61 6C 4C 6F 63 6B 59 46 FA 00
+# --- BONE MAPPING V11 ---
+Head_Position_Offset_Y: 48 FA 00 00
+Neck_Position_Offset_Y: 46 C8 00 00
+# --- AIMBOT ENGINE ---
+AimAssist_Force_Magnet: 4F BB 80 00
+Auto_Aim_FOV_Radius: 44 B4 00 00
+Aim_Lock_Persistence: 01 00 00 00
 # --- NO RECOIL / SPREAD ---
-5A 65 72 6F 52 65 63 6F 69 6C 56 61 6C 75 65 01
+Bullet_Spread_Value: 00 00 00 00
+Weapon_Recoil_Stability: 3F 80 00 00
 # --- HITBOX OVERLAP ---
-48 69 74 62 6F 78 52 61 64 69 75 73 43 C8 00 00
+Hitbox_Head_Size: 45 AF 00 00
+Enemy_Bone_Priority: 01 00 00 00

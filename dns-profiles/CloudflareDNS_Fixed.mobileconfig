@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+  "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+
+    <!-- ╔══════════════════════════════════════════════╗ -->
+    <!--   CABECERA GLOBAL DEL PERFIL                    -->
+    <!-- ╚══════════════════════════════════════════════╝ -->
+
+    <key>PayloadDisplayName</key>
+    <string>Cloudflare DoH 1.1.1.1</string>
+
+    <key>PayloadDescription</key>
+    <string>DNS-over-HTTPS con Cloudflare 1.1.1.1 y 1.0.0.1. Activo en Wi-Fi y Datos Móviles. iOS 17 / 18.</string>
+
+    <key>PayloadIdentifier</key>
+    <string>com.cloudflare.doh.profile.v2</string>
+
+    <key>PayloadOrganization</key>
+    <string>Cloudflare</string>
+
+    <key>PayloadType</key>
+    <string>Configuration</string>
+
+    <key>PayloadVersion</key>
+    <integer>1</integer>
+
+    <key>PayloadUUID</key>
+    <string>C3D4E5F6-A7B8-9012-CDEF-234567890ABC</string>
+
+    <key>PayloadRemovalDisallowed</key>
+    <false/>
+
+    <!-- ╔══════════════════════════════════════════════╗ -->
+    <!--   LISTA DE PAYLOADS                             -->
+    <!-- ╚══════════════════════════════════════════════╝ -->
+    <key>PayloadContent</key>
+    <array>
+        <dict>
+
+            <!-- Tipo de payload requerido por Apple -->
+            <key>PayloadType</key>
+            <string>com.apple.dnsSettings.managed</string>
+
+            <key>PayloadDisplayName</key>
+            <string>Cloudflare DoH DNS</string>
+
+            <key>PayloadDescription</key>
+            <string>Configura DNS-over-HTTPS con Cloudflare.</string>
+
+            <key>PayloadIdentifier</key>
+            <string>com.cloudflare.doh.profile.v2.dns</string>
+
+            <key>PayloadUUID</key>
+            <string>D4E5F6A7-B8C9-0123-DEFA-34567890ABCD</string>
+
+            <key>PayloadVersion</key>
+            <integer>1</integer>
+
+            <!-- ┌──────────────────────────────────────────┐ -->
+            <!-- │  DNSSettings  ← CAMPO CRÍTICO OBLIGATORIO │ -->
+            <!-- │  Todos los parámetros DNS van AQUÍ DENTRO  │ -->
+            <!-- └──────────────────────────────────────────┘ -->
+            <key>DNSSettings</key>
+            <dict>
+                <!-- Protocolo: DNS-over-HTTPS -->
+                <key>DNSProtocol</key>
+                <string>HTTPS</string>
+
+                <!-- URL del servidor DoH de Cloudflare -->
+                <key>ServerURL</key>
+                <string>https://cloudflare-dns.com/dns-query</string>
+
+                <!-- Servidores DNS: IPv4 + IPv6 de Cloudflare -->
+                <key>ServerAddresses</key>
+                <array>
+                    <string>1.1.1.1</string>
+                    <string>1.0.0.1</string>
+                    <string>2606:4700:4700::1111</string>
+                    <string>2606:4700:4700::1001</string>
+                </array>
+            </dict>
+            <!-- ────────────────────────────────────────── -->
+
+            <!-- ┌──────────────────────────────────────────┐ -->
+            <!-- │  OnDemand: activo en Wi-Fi y Celular      │ -->
+            <!-- └──────────────────────────────────────────┘ -->
+            <key>OnDemandEnabled</key>
+            <integer>1</integer>
+
+            <key>OnDemandRules</key>
+            <array>
+
+                <!-- Regla 1: Wi-Fi → Connect -->
+                <dict>
+                    <key>Action</key>
+                    <string>Connect</string>
+                    <key>InterfaceTypeMatch</key>
+                    <string>WiFi</string>
+                </dict>
+
+                <!-- Regla 2: Datos Móviles → Connect -->
+                <dict>
+                    <key>Action</key>
+                    <string>Connect</string>
+                    <key>InterfaceTypeMatch</key>
+                    <string>Cellular</string>
+                </dict>
+
+                <!-- Regla 3: Fallback → Connect (cualquier interfaz) -->
+                <dict>
+                    <key>Action</key>
+                    <string>Connect</string>
+                </dict>
+
+            </array>
+
+        </dict>
+    </array>
+
+</dict>
+</plist>

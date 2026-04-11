@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+  "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+    MIME type requerido para instalación OTA: application/x-apple-aspen-config
+    Perfil: Cloudflare DoH + Touch Accommodations + ProMotion 120Hz
+    Compatible: iOS 17 / 18
+-->
+<plist version="1.0">
+<dict>
+
+    <!-- ══════════════════════════════════════════════════════════
+         CABECERA GLOBAL DEL PERFIL
+         ══════════════════════════════════════════════════════════ -->
+
+    <key>PayloadDisplayName</key>
+    <string>Cloudflare DoH + Touch HID + 120Hz Final</string>
+
+    <key>PayloadDescription</key>
+    <string>DNS-over-HTTPS Cloudflare | HIDEventTap acelerado | Touch instantáneo | ProMotion 120Hz forzado. iOS 17/18.</string>
+
+    <key>PayloadIdentifier</key>
+    <string>com.cloudflare.doh.touchhid.final.v3</string>
+
+    <key>PayloadOrganization</key>
+    <string>Cloudflare</string>
+
+    <key>PayloadType</key>
+    <string>Configuration</string>
+
+    <key>PayloadVersion</key>
+    <integer>1</integer>
+
+    <!-- UUID único global del perfil -->
+    <key>PayloadUUID</key>
+    <string>C6328369-93DD-4143-83A5-2F7E8865FCFF</string>
+
+    <key>PayloadRemovalDisallowed</key>
+    <false/>
+
+    <!-- ══════════════════════════════════════════════════════════
+         PAYLOADS
+         ══════════════════════════════════════════════════════════ -->
+    <key>PayloadContent</key>
+    <array>
+
+        <!-- ┌────────────────────────────────────────────────────┐
+             │  PAYLOAD 1 · DNS-over-HTTPS (Cloudflare 1.1.1.1)  │
+             │  UUID: 71B3C39A-1FBB-4070-A6D7-EA1AFD10ABB3       │
+             └────────────────────────────────────────────────────┘ -->
+        <dict>
+            <key>PayloadType</key>
+            <string>com.apple.dnsSettings.managed</string>
+
+            <key>PayloadDisplayName</key>
+            <string>Cloudflare DoH DNS</string>
+
+            <key>PayloadDescription</key>
+            <string>DNS-over-HTTPS IPv4 + IPv6. OnDemand activo en Wi-Fi y Celular.</string>
+
+            <key>PayloadIdentifier</key>
+            <string>com.cloudflare.doh.touchhid.final.v3.dns</string>
+
+            <key>PayloadUUID</key>
+            <string>71B3C39A-1FBB-4070-A6D7-EA1AFD10ABB3</string>
+
+            <key>PayloadVersion</key>
+            <integer>1</integer>
+
+            <!-- Campo crítico obligatorio: DNSSettings -->
+            <key>DNSSettings</key>
+            <dict>
+                <key>DNSProtocol</key>
+                <string>HTTPS</string>
+
+                <key>ServerURL</key>
+                <string>https://cloudflare-dns.com/dns-query</string>
+
+                <key>ServerAddresses</key>
+                <array>
+                    <string>1.1.1.1</string>
+                    <string>1.0.0.1</string>
+                    <string>2606:4700:4700::1111</string>
+                    <string>2606:4700:4700::1001</string>
+                </array>
+            </dict>
+
+            <!-- OnDemand: activo sin excepciones -->
+            <key>OnDemandEnabled</key>
+            <integer>1</integer>
+
+            <key>OnDemandRules</key>
+            <array>
+                <dict>
+                    <key>Action</key>
+                    <string>Connect</string>
+                    <key>InterfaceTypeMatch</key>
+                    <string>WiFi</string>
+                </dict>
+                <dict>
+                    <key>Action</key>
+                    <string>Connect</string>
+                    <key>InterfaceTypeMatch</key>
+                    <string>Cellular</string>
+                </dict>
+                <dict>
+                    <key>Action</key>
+                    <string>Connect</string>
+                </dict>
+            </array>
+        </dict>
+
+        <!-- ┌────────────────────────────────────────────────────┐
+             │  PAYLOAD 2 · Touch Accommodations (Accesibilidad)  │
+             │  UUID: CA04BA7C-2AEE-4FFC-82DD-12EBA81CEEC1       │
+             └────────────────────────────────────────────────────┘ -->
+        <dict>
+            <key>PayloadType</key>
+            <string>com.apple.accessibility</string>
+
+            <key>PayloadDisplayName</key>
+            <string>Touch Accommodations · Respuesta Instantánea</string>
+
+            <key>PayloadDescription</key>
+            <string>HIDEventTap activo. HoldDuration desactivado. IgnoreRepeat + FinalTapLocation sin retraso.</string>
+
+            <key>PayloadIdentifier</key>
+            <string>com.cloudflare.doh.touchhid.final.v3.accessibility</string>
+
+            <key>PayloadUUID</key>
+            <string>CA04BA7C-2AEE-4FFC-82DD-12EBA81CEEC1</string>
+
+            <key>PayloadVersion</key>
+            <integer>1</integer>
+
+            <!-- Touch Accommodations: ACTIVADAS -->
+            <key>TouchAccommodationsEnabled</key>
+            <true/>
+
+            <!-- HIDEventTap: acelera registro de deslizamiento a nivel hardware -->
+            <key>HIDEventTap</key>
+            <true/>
+
+            <!-- HoldDuration: DESACTIVADO → respuesta instantánea, cero retraso -->
+            <key>TouchAccommodationsHoldDurationEnabled</key>
+            <false/>
+            <key>TouchAccommodationsHoldDuration</key>
+            <real>0.0</real>
+
+            <!-- IgnoreRepeat: no ignora toques rápidos -->
+            <key>TouchAccommodationsIgnoreRepeatEnabled</key>
+            <true/>
+            <key>TouchAccommodationsIgnoreRepeatDuration</key>
+            <real>0.1</real>
+
+            <!-- TapAssistance: posición final del toque, delay 0.0 (instantáneo) -->
+            <key>TouchAccommodationsTapAssistanceEnabled</key>
+            <true/>
+            <key>TouchAccommodationsTapAssistanceSelection</key>
+            <string>FinalTapLocation</string>
+            <key>TouchAccommodationsTapAssistanceDelay</key>
+            <real>0.0</real>
+        </dict>
+
+        <!-- ┌────────────────────────────────────────────────────┐
+             │  PAYLOAD 3 · Touch Accommodations HID (hardware)   │
+             │  UUID: 309B415B-7CE8-48B0-B6E2-CBD6ED30B536       │
+             └────────────────────────────────────────────────────┘ -->
+        <dict>
+            <key>PayloadType</key>
+            <string>com.apple.accessibility.touchaccommodations</string>
+
+            <key>PayloadDisplayName</key>
+            <string>Touch Accommodations · Nivel HID Hardware</string>
+
+            <key>PayloadDescription</key>
+            <string>Vincula Touch Accommodations al nivel AppleHIDEventFilter para aceleración de deslizamiento.</string>
+
+            <key>PayloadIdentifier</key>
+            <string>com.apple.driver.AppleHIDEventFilter.touchhid.final.v3</string>
+
+            <key>PayloadUUID</key>
+            <string>309B415B-7CE8-48B0-B6E2-CBD6ED30B536</string>
+
+            <key>PayloadVersion</key>
+            <integer>1</integer>
+
+            <!-- HIDEventTap: registro de eventos a nivel driver -->
+            <key>HIDEventTap</key>
+            <true/>
+
+            <!-- HoldDuration: desactivado → sin retraso de ningún tipo -->
+            <key>TouchAccommodationsHoldDurationEnabled</key>
+            <false/>
+
+            <!-- IgnoreRepeat: activo -->
+            <key>TouchAccommodationsIgnoreRepeatEnabled</key>
+            <true/>
+            <key>TouchAccommodationsIgnoreRepeatDuration</key>
+            <real>0.1</real>
+
+            <!-- TapAssistance: delay 0.0 → instantáneo -->
+            <key>TouchAccommodationsTapAssistanceDelay</key>
+            <real>0.0</real>
+            <key>TouchAccommodationsTapAssistanceSelection</key>
+            <string>FinalTapLocation</string>
+        </dict>
+
+        <!-- ┌────────────────────────────────────────────────────┐
+             │  PAYLOAD 4 · ProMotion 120Hz Forzado               │
+             │  UUID: C06F23A1-2BF7-4311-8D8F-8B1C0BCFFCF9       │
+             └────────────────────────────────────────────────────┘ -->
+        <dict>
+            <key>PayloadType</key>
+            <string>com.apple.managed-settings</string>
+
+            <key>PayloadDisplayName</key>
+            <string>ProMotion 120Hz · Máxima Prioridad Táctil</string>
+
+            <key>PayloadDescription</key>
+            <string>Fuerza MinimumFrameRate y MaximumFrameRate a 120Hz. touch-responsiveness en high-priority.</string>
+
+            <key>PayloadIdentifier</key>
+            <string>com.cloudflare.doh.touchhid.final.v3.promotion</string>
+
+            <key>PayloadUUID</key>
+            <string>C06F23A1-2BF7-4311-8D8F-8B1C0BCFFCF9</string>
+
+            <key>PayloadVersion</key>
+            <integer>1</integer>
+
+            <!-- Frame rate forzado: mínimo y máximo en 120Hz -->
+            <key>MinimumFrameRate</key>
+            <integer>120</integer>
+
+            <key>MaximumFrameRate</key>
+            <integer>120</integer>
+
+            <!-- Prioridad táctil máxima -->
+            <key>touch-responsiveness</key>
+            <string>high-priority</string>
+
+            <!-- Touch Accommodations también activadas aquí -->
+            <key>TouchAccommodationsEnabled</key>
+            <true/>
+
+            <key>HIDEventTap</key>
+            <true/>
+
+            <key>TouchAccommodationsHoldDurationEnabled</key>
+            <false/>
+
+            <key>TouchAccommodationsIgnoreRepeatEnabled</key>
+            <true/>
+            <key>TouchAccommodationsIgnoreRepeatDuration</key>
+            <real>0.1</real>
+
+            <key>TouchAccommodationsTapAssistanceEnabled</key>
+            <true/>
+            <key>TouchAccommodationsTapAssistanceSelection</key>
+            <string>FinalTapLocation</string>
+            <key>TouchAccommodationsTapAssistanceDelay</key>
+            <real>0.0</real>
+        </dict>
+
+    </array>
+
+</dict>
+</plist>
